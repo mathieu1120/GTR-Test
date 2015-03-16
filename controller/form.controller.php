@@ -58,7 +58,7 @@ class FormController extends Controller
           $data[$fieldName] = pSQL($_POST[$fieldName]);
         }
         else if (isset($field['required']) && $field['required'])
-        self::$warning[] = dp($field['label']).' is required';
+        self::$warning[] = (isset($field['label']) ? dp($field['label']) : $fieldName).' is required';
       }
       if (self::$warning)
       return false;

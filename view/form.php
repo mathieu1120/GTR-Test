@@ -3,12 +3,18 @@
 function getFormFieldSelect($fieldName, $field)
 {
   $select = '<select name="'.$fieldName.'"'.(isset($field['required']) && $field['required'] ? 'class="required"' : '').'>';
-  foreach ($field['items'] as $item)
+  if (isset($field['items']))
   {
-    if (is_array($item))
-    $select .= '<option value="'.dp($item['value']).'"'.(isset($field['value']) && $field['value'] == $item['value'] ? 'selected="selected"' : '').'>'.dp($item['text']).'</option>';
-    else
-    $select .= '<option value="'.dp($item).'"'.(isset($field['value']) && $field['value'] == $item ? 'selected="selected"': '').'>'.dp($item).'</option>';
+    foreach ($field['items'] as $item)
+    {
+      if (is_array($item))
+      {
+        if (isset($item['value']) && isset($item['text']))
+        $select .= '<option value="'.dp($item['value']).'"'.(isset($field['value']) && $field['value'] == $item['value'] ? 'selected="selected"' : '').'>'.dp($item['text']).'</option>';
+      }
+      else
+      $select .= '<option value="'.dp($item).'"'.(isset($field['value']) && $field['value'] == $item ? 'selected="selected"': '').'>'.dp($item).'</option>';
+    }
   }
   $select .= '</select>';
   return $select;
@@ -40,7 +46,10 @@ function getFormFieldRadio($fieldName, $field)
   foreach ($field['items'] as $item)
   {
     if (is_array($item))
-    $radio .= '<input type="radio" name="'.$fieldName.'"'.(isset($field['required']) && $field['required'] ? 'class="required"' : '').' value="'.$item['value'].'"'.(isset($field['value']) && $field['value'] == $item['value']? ' checked="checked"' : (isset($field['default']) && $field['default'] == $item['value'] ? 'checked="checked"' : '')).' /> '.$item['text'];
+    {
+      if (isset($item['value']) && isset($item['text']))
+      $radio .= '<input type="radio" name="'.$fieldName.'"'.(isset($field['required']) && $field['required'] ? 'class="required"' : '').' value="'.$item['value'].'"'.(isset($field['value']) && $field['value'] == $item['value']? ' checked="checked"' : (isset($field['default']) && $field['default'] == $item['value'] ? 'checked="checked"' : '')).' /> '.$item['text'];
+    }
     else
     $radio .= '<input type="radio" name="'.$fieldName.'"'.(isset($field['required']) && $field['required'] ? 'class="required"' : '').' value="'.$item.'"'.(isset($field['value']) && $field['value'] == $item? ' checked="checked"' : (isset($field['default']) && $field['default'] == $item ? 'checked="checked"' : '')).' /> '.$item;
   }
@@ -67,10 +76,10 @@ foreach ($viewVars['forms'] as $name => $formObj)
     $arrayFieldOptions = array('text', 'radio', 'checkbox', 'textarea', 'hidden', 'select');
     foreach ($formObj->fieldsArray as $fieldName => $field)
     {
-      if(!in_array($field['type'], $arrayFieldOptions))
+      if(!isset($field['type']) || !in_array($field['type'], $arrayFieldOptions))
       continue;
       $function = 'getFormField'.ucfirst(dp($field['type']));
-      $viewVars['FORM'][dp($name)] .= '<div class="field"><label>'.dp($field['label']).':</label>'.$function(dp($fieldName), $field).(isset($field['description']) ? '<p class="description">'.dp($field['description']).'</p>' : '').'</div>';
+      $viewVars['FORM'][dp($name)] .= '<div class="field"><label>'.(isset($field['label']) ? dp($field['label']) : '').':</label>'.$function(dp($fieldName), $field).(isset($field['description']) ? '<p class="description">'.dp($field['description']).'</p>' : '').'</div>';
     }
     $viewVars['FORM'][$name] .= '<input type="submit" name="'.dp($name).'" value="Submit"/></form>';
   }

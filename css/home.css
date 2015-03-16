@@ -1,0 +1,62 @@
+body
+{
+    width: 960px;
+    margin: 0 auto;
+    background-image: url('http://www.gtrmeetings.com/testing/wp-content/themes/GTR3/img/bg-big-circle.png');
+}
+
+#header
+{
+    border-bottom: 2px solid #0d6dc6;
+    margin-bottom: 20px;
+}
+
+#validation
+{
+    background-color: green;
+}
+
+#warning
+{
+    background-color: red;
+}
+
+#footer
+{
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    background-color: #0d6dc6;
+    margin-top: 20px;
+}
+
+#formList
+{
+    margin: 0;
+    padding: 0;
+    border: 1px solid #0d6dc6;
+}
+
+#formList li
+{
+    display: inline-block;
+    padding: 10px;
+    border-right: 1px solid #0d6dc6;
+}
+
+#formList li a
+{
+    text-decoration: none;
+}
+
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table td, table th
+{
+    border: 1px solid black;
+}

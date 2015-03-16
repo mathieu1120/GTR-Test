@@ -1,0 +1,39 @@
+.field
+{
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+label
+{
+    text-align: right;
+    width: 350px;
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+input[type="submit"]
+{
+    margin-left: 370px;
+}
+
+.description
+{
+    margin-left: 370px;
+}
+
+input
+{
+    vertical-align: middle;
+}
+
+textarea
+{
+    vertical-align: top;
+    width: calc(100% - 377px);
+    max-width: calc(100% - 377px);
+    height: 100px;
+}

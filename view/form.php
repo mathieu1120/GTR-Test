@@ -64,8 +64,11 @@ foreach ($viewVars['forms'] as $name => $formObj)
   $viewVars['FORM'][dp($name)] = ($formObj->title ? '<h2>'.$formObj->title.'</h2>': '').'<form name="'.dp($name).'" action="'.dp($formObj->action).'" method="'.dp($formObj->method).'"'.($formObj->file ? 'enctype="multipart/form-data"' : '').'>';
   if ($formObj->fieldsArray)
   {
+    $arrayFieldOptions = array('text', 'radio', 'checkbox', 'textarea', 'hidden', 'select');
     foreach ($formObj->fieldsArray as $fieldName => $field)
     {
+      if(!in_array($field['type'], $arrayFieldOptions))
+      continue;
       $function = 'getFormField'.ucfirst(dp($field['type']));
       $viewVars['FORM'][dp($name)] .= '<div class="field"><label>'.dp($field['label']).':</label>'.$function(dp($fieldName), $field).(isset($field['description']) ? '<p class="description">'.dp($field['description']).'</p>' : '').'</div>';
     }

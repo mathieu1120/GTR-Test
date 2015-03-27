@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GTR Form Creator</title>
+    <title>Form Creator</title>
     <meta charset="UTF-8">
     <?php
     foreach ($viewVars['media']['css'] as $css)
@@ -12,4 +12,4 @@
     ?>
   </head>
   <body>
-      <div id="header"><a href="./"><img src="http://www.gtrmeetings.com/testing/wp-content/themes/GTR3/img/identity.png" alt="logo"/></a></div>
+      <div id="header"><a href="./">Index</a></div>
